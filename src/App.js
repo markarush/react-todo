@@ -5,6 +5,7 @@ import ToDo from './components/ToDo.js';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.deleteTodo = this.deleteTodo.bind(this);
     this.state = {
       todos: [
         { description: 'Walk the cat', isCompleted: true },
@@ -33,6 +34,12 @@ class App extends Component {
     this.setState({ todos: todos });
   }
 
+  deleteTodo(index) {
+    const todo = this.state.todos[index];
+    const todos = this.state.todos.filter(el => el !== todo);
+    this.setState({todos: todos });
+  }
+
   render() {
     return (
       <div className="App">
@@ -44,6 +51,7 @@ class App extends Component {
               description={ todo.description }
               isCompleted={ todo.isCompleted }
               toggleComplete={ () => this.toggleComplete(index) }
+              deleteTodo={ () => this.deleteTodo(index )}
             />
           )}
         </ul>
